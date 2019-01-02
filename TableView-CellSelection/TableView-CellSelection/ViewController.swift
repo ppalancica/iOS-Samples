@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  TableView-Basic
+//  TableView-CellSelection
 //
-//  Created by Pavel Palancica on 1/1/19.
+//  Created by Pavel Palancica on 1/2/19.
 //  Copyright © 2019 I Dev TV. All rights reserved.
 //
 
@@ -25,6 +25,7 @@ class ViewController: UIViewController {
         
         tempTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         tempTableView.dataSource = self
+        tempTableView.delegate = self
         
         return tempTableView
     }()
@@ -50,5 +51,14 @@ extension ViewController: UITableViewDataSource {
         cell.textLabel?.text = String(number)
         
         return cell
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        print("Selected row: \(indexPath.row)")
+        print("Selected value: " + String(numbers[indexPath.row]))
     }
 }
